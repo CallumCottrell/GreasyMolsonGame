@@ -1,27 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class PlayerMovement : MonoBehaviour
 {
-
-
-    
     public CharacterController controller;
 
     public float speed = 12f;
     public float gravity = -9.81f;
-
-    
-
-
 
     public Transform groundCheck;
 
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     //public float jumpHeight = 3f;
-
     
     Vector3 velocity;
 
@@ -45,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-
         Vector3 move = transform.right * x + transform.forward * z;
+
 
         controller.Move(move * speed * Time.deltaTime);
 
@@ -66,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
         else if (velocity.y > 0 && !Input.GetButton ("Jump")) {
             velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-
 
         }
         
