@@ -4,27 +4,11 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     
-    public GameObject FloatingTextPrefab;
-    
-
     void OnCollisionEnter(Collision hit){
-        UnityEngine.Debug.Log(hit.gameObject.name);
-        if (hit.gameObject.name == "tree"){  
+        UnityEngine.Debug.Log(hit.gameObject.tag);
+        if (hit.gameObject.tag == "tree"){  
         }
-        
-        if (FloatingTextPrefab)
-        {
-        showFloatingText();
-
-        }
-    }
-  
-
     
-    
-    void showFloatingText()
-    {
-        Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
     }
 
 }
