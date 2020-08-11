@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public Canvas canvas;
+    public GameObject checkmark;
 
+    public GameObject textGO;
     public float speed = 12f;
     public float gravity = -9.81f;
 
@@ -24,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
  
+    bool treeSeen = false;
     // Update is called once per frame
     void Update()
     {
@@ -60,6 +65,34 @@ public class PlayerMovement : MonoBehaviour
             velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
 
         }
+
+        RaycastHit rayHit;
+        Ray landingRay = new Ray(transform.position, Vector3.forward);
         
+        if (!treeSeen && Physics.Raycast(landingRay, out rayHit, 5)){
+            if (rayHit.collider.tag == "tree"){
+            
+            textGO = new GameObject("check");
+
+            textGO.transform.SetParent(canvas.transform);
+           
+            textGO.transform.TransformVector(new Vector3(0,0,0));
+            Text myText = textGO.AddComponent<Text>();
+            Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+            myText.font = ArialFont;
+            myText.text = "You made this by looking at a tree";
+
+
+            UnityEngine.Debug.Log("Raycast worked");
+
+            treeSeen = true;
+            }   
+           
+        }
     }
+
+    void Start(){
+       
+    }
+    
 }
