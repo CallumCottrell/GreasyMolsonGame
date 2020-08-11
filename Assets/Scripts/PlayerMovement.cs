@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     //public float jumpHeight = 3f;
+
+
+    //enemyDamage is how much syrup is taken from the tree
+    public float enemyDamage = 10f;
     
     Vector3 velocity;
 
@@ -74,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
         
         if (Physics.Raycast(landingRay, out rayHit, treeCheckDistance)){
             if (!treeSeen && rayHit.collider.tag == "tree"){
+
+                
+            
             
             //Going to create a text object to put in the canvas
             textGO = new GameObject("check");
@@ -104,11 +111,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (treeSeen && Input.GetKeyDown(KeyCode.E)){
-                UnityEngine.Debug.Log("You pressed E");
-                //Fill the bucket
-                mapleBar.value += 10;
+                //UnityEngine.Debug.Log("You pressed E");
 
-            }
+                    rayHit.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage);
+                }
+
+                
+
+                //Fill the bucket
+                //mapleBar.value += 10;
+
+            
     }
 
     void Start(){
