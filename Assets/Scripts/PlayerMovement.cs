@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Canvas canvas;
-    public GameObject checkmark;
+
+    public Slider mapleBar;
 
     public GameObject textGO;
     public float speed = 12f;
@@ -83,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
             //I hate this. I dont know why i need to do this
             textGO.transform.Translate(new Vector3(706, 397, 0));
 
-
             Text myText = textGO.AddComponent<Text>();
             Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
             myText.font = ArialFont;
@@ -92,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
 
             UnityEngine.Debug.Log("Raycast worked");
             treeSeen = true;
-
             }      
 
         }
@@ -103,6 +102,13 @@ public class PlayerMovement : MonoBehaviour
             }
                          
         }
+
+        if (treeSeen && Input.GetKeyDown(KeyCode.E)){
+                UnityEngine.Debug.Log("You pressed E");
+                //Fill the bucket
+                mapleBar.value += 10;
+
+            }
     }
 
     void Start(){
