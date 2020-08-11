@@ -5,7 +5,7 @@ public class PlayerCollision : MonoBehaviour
 {
     
     public GameObject FloatingTextPrefab;
-    public Transform playerBody;
+    
 
     void OnCollisionEnter(Collision hit){
         UnityEngine.Debug.Log(hit.gameObject.name);
@@ -15,7 +15,7 @@ public class PlayerCollision : MonoBehaviour
         if (FloatingTextPrefab)
         {
         showFloatingText();
-        
+
         }
     }
   
