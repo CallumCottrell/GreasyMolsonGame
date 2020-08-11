@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             textGO.transform.SetParent(canvas.transform);
            
             //I hate this. I dont know why i need to do this
-            textGO.transform.Translate(new Vector3(706, 397, 0));
+            textGO.transform.Translate(Screen.width/2, Screen.height/2, 0);
 
             Text myText = textGO.AddComponent<Text>();
             Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
