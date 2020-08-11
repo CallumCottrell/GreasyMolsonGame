@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
  
+    public int treeCheckDistance = 6;
+
     bool treeSeen = false;
     // Update is called once per frame
     void Update()
@@ -67,9 +69,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         RaycastHit rayHit;
-        Ray landingRay = new Ray(transform.position, Vector3.forward);
+        Ray landingRay = new Ray(transform.position, this.transform.forward);
         
-        if (Physics.Raycast(landingRay, out rayHit, 3)){
+        if (Physics.Raycast(landingRay, out rayHit, treeCheckDistance)){
             if (!treeSeen && rayHit.collider.tag == "tree"){
             
             //Going to create a text object to put in the canvas
@@ -90,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
             UnityEngine.Debug.Log("Raycast worked");
             treeSeen = true;
+
             }      
 
         }
