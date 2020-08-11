@@ -69,25 +69,36 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit rayHit;
         Ray landingRay = new Ray(transform.position, Vector3.forward);
         
-        if (!treeSeen && Physics.Raycast(landingRay, out rayHit, 5)){
-            if (rayHit.collider.tag == "tree"){
+        if (Physics.Raycast(landingRay, out rayHit, 10)){
+            if (!treeSeen && rayHit.collider.tag == "tree"){
             
+            //Going to create a text object to put in the canvas
             textGO = new GameObject("check");
 
+            // Set the canvas as the parent
             textGO.transform.SetParent(canvas.transform);
            
-            textGO.transform.TransformVector(new Vector3(0,0,0));
+            //I hate this. I dont know why i need to do this
+            textGO.transform.Translate(new Vector3(706, 397, 0));
+
+
             Text myText = textGO.AddComponent<Text>();
             Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
             myText.font = ArialFont;
-            myText.text = "You made this by looking at a tree";
+            myText.text = "Press E for Maple Syrup";
 
 
             UnityEngine.Debug.Log("Raycast worked");
-
             treeSeen = true;
-            }   
-           
+            }      
+
+        }
+        else {
+            if (textGO){
+                Destroy(textGO);
+                treeSeen = false;
+            }
+                         
         }
     }
 
