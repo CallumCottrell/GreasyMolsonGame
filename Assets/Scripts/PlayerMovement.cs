@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit rayHit;
         Ray landingRay = new Ray(transform.position, Vector3.forward);
         
-        if (Physics.Raycast(landingRay, out rayHit, 10)){
+        if (Physics.Raycast(landingRay, out rayHit, 3)){
             if (!treeSeen && rayHit.collider.tag == "tree"){
             
             //Going to create a text object to put in the canvas
