@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Slider mapleBar;
 
+
     public GameObject textGO;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -113,15 +114,10 @@ public class PlayerMovement : MonoBehaviour
         if (treeSeen && Input.GetKeyDown(KeyCode.E)){
                 //UnityEngine.Debug.Log("You pressed E");
 
-                    rayHit.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage);
+                    rayHit.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage); 
                 }
-
-                
-
                 //Fill the bucket
                 //mapleBar.value += 10;
-
-            
     }
 
     void Start(){
