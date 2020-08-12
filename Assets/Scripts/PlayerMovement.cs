@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
  
     public int treeCheckDistance = 6;
 
-    bool treeSeen = false;
+    bool lookingAtTree = false;
     // Update is called once per frame
     void Update()
     {
@@ -75,46 +75,31 @@ public class PlayerMovement : MonoBehaviour
         }
 
         RaycastHit rayHit;
-        Ray landingRay = new Ray(transform.position, this.transform.forward);
+        Ray rayFromPlayer = new Ray(transform.position, this.transform.forward);
         
-        if (Physics.Raycast(landingRay, out rayHit, treeCheckDistance)){
-            if (!treeSeen && rayHit.collider.tag == "tree"){
+        if (Physics.Raycast(rayFromPlayer, out rayHit, treeCheckDistance)){
+            if (!lookingAtTree && rayHit.collider.tag == "tree"){
 
-                
-            
-            
-            //Going to create a text object to put in the canvas
-            textGO = new GameObject("check");
-
-            // Set the canvas as the parent
-            textGO.transform.SetParent(canvas.transform);
-           
-            //I hate this. I dont know why i need to do this
-            textGO.transform.Translate(Screen.width/2, Screen.height/2, 0);
-
-            Text myText = textGO.AddComponent<Text>();
-            Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-            myText.font = ArialFont;
-            myText.text = "Press E for Maple Syrup";
-
-
+            createTextOnCursor("Press E for Maple Syrup");
+    
             UnityEngine.Debug.Log("Raycast worked");
-            treeSeen = true;
+            lookingAtTree = true;
             }      
 
         }
         else {
             if (textGO){
                 Destroy(textGO);
-                treeSeen = false;
+                lookingAtTree = false;
             }
                          
         }
 
-        if (treeSeen && Input.GetKeyDown(KeyCode.E)){
+        if (lookingAtTree && Input.GetKeyDown(KeyCode.E)){
                 //UnityEngine.Debug.Log("You pressed E");
 
                     rayHit.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage); 
+                    
                 }
                 //Fill the bucket
                 //mapleBar.value += 10;
@@ -124,4 +109,18 @@ public class PlayerMovement : MonoBehaviour
        
     }
     
+    void createTextOnCursor(string text){
+         //Going to create a text object to put in the canvas
+            textGO = new GameObject("check");
+
+            // Set the canvas as the parent
+            textGO.transform.SetParent(canvas.transform);
+            textGO.transform.Translate(Screen.width/2, Screen.height/2, 0);
+
+            Text myText = textGO.AddComponent<Text>();
+            Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+            myText.font = ArialFont;
+            myText.text = text;
+
+    }
 }
