@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Canvas canvas;
-    private Slider mapleHealth; 
     private GameObject mapleHealthGO;
     public GameObject textGO;
     public float speed = 12f;
@@ -21,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     //public float jumpHeight = 3f;
 
+    public RaycastHit currentTree;
 
     //enemyDamage is how much syrup is taken from the tree
     public float enemyDamage = 10f;
@@ -78,30 +78,22 @@ public class PlayerMovement : MonoBehaviour
 
         // Check for what the user is looking at by casting a ray forward from the user
         RaycastHit rayHit;
+    
         Ray rayFromPlayer = new Ray(transform.position, this.transform.forward);
         
         if (Physics.Raycast(rayFromPlayer, out rayHit, lookDistance)){
 
             //If we found a tree and we arent already looking at a tree
             if (!lookingAtTree && rayHit.collider.tag == "tree"){
-
+                
+            currentTree = rayHit;    
             createTextOnCursor("Press E for Maple Syrup");
-
-            mapleHealthGO = new GameObject("health");
-            
-            mapleHealthGO.transform.SetParent(canvas.transform);
-
-            mapleHealth = canvas.GetComponentInChildren<Slider>();
-
-            mapleHealthGO.transform.Translate(Screen.width/5, 0, 0);
-
-            mapleHealth.SetDirection(Slider.Direction.TopToBottom, false);
-            
+            currentTree.collider.GetComponent<TreeHealth>().showBar();
             lookingAtTree = true;
 
             }   
             else if (rayHit.collider.tag == "igloo"){
-                UnityEngine.Debug.Log("Looking at a tree with raycast");
+                UnityEngine.Debug.Log("Looking at igloo with raycast");
         
             }   
 
@@ -109,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         else {
             if (textGO){
                 Destroy(textGO);
-                Destroy(mapleHealthGO);
+                currentTree.collider.GetComponent<TreeHealth>().hideBar();
                 lookingAtTree = false;
             }
                          
