@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+
+
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Canvas canvas;
-
-    public Slider mapleBar;
-
-
+    private Slider mapleHealth; 
+    private GameObject mapleHealthGO;
     public GameObject textGO;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -34,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
  
-    public int treeCheckDistance = 6;
+    //How far away the looking raycast will go
+    const int lookDistance = 6;
 
     bool lookingAtTree = false;
     // Update is called once per frame
@@ -74,22 +75,41 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+
+        // Check for what the user is looking at by casting a ray forward from the user
         RaycastHit rayHit;
         Ray rayFromPlayer = new Ray(transform.position, this.transform.forward);
         
-        if (Physics.Raycast(rayFromPlayer, out rayHit, treeCheckDistance)){
+        if (Physics.Raycast(rayFromPlayer, out rayHit, lookDistance)){
+
+            //If we found a tree and we arent already looking at a tree
             if (!lookingAtTree && rayHit.collider.tag == "tree"){
 
             createTextOnCursor("Press E for Maple Syrup");
-    
-            UnityEngine.Debug.Log("Raycast worked");
+
+            mapleHealthGO = new GameObject("health");
+            
+            mapleHealthGO.transform.SetParent(canvas.transform);
+
+            mapleHealth = canvas.GetComponentInChildren<Slider>();
+
+            mapleHealthGO.transform.Translate(Screen.width/5, 0, 0);
+
+            mapleHealth.SetDirection(Slider.Direction.TopToBottom, false);
+            
             lookingAtTree = true;
-            }      
+
+            }   
+            else if (rayHit.collider.tag == "igloo"){
+                UnityEngine.Debug.Log("Looking at a tree with raycast");
+        
+            }   
 
         }
         else {
             if (textGO){
                 Destroy(textGO);
+                Destroy(mapleHealthGO);
                 lookingAtTree = false;
             }
                          
