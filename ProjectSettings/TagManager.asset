@@ -6,6 +6,7 @@ TagManager:
   tags:
   - tree
   - maple
+  - ground
   layers:
   - Default
   - TransparentFX

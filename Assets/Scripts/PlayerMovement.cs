@@ -16,6 +16,12 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform groundCheck;
 
+    public Camera playerCamera;
+// For throwing the Snowball
+    public Rigidbody snowBall;
+    public Transform snowBallTransform;
+
+
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     //public float jumpHeight = 3f;
@@ -85,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
             //If we found a tree and we arent already looking at a tree
             if (!lookingAtTree && rayHit.collider.tag == "tree"){
-                
+
             currentTree = rayHit;    
             createTextOnCursor("Press E for Maple Syrup");
             currentTree.collider.GetComponent<TreeHealth>().showBar();
@@ -113,6 +119,11 @@ public class PlayerMovement : MonoBehaviour
                     rayHit.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage); 
                     
                 }
+        else if (Input.GetKeyDown(KeyCode.G)){
+                //Throw some snow
+                    fireSnowBall();
+                 
+        }
                 //Fill the bucket
                 //mapleBar.value += 10;
     }
@@ -134,5 +145,10 @@ public class PlayerMovement : MonoBehaviour
             myText.font = ArialFont;
             myText.text = text;
 
+    }
+
+    void fireSnowBall(){
+           Rigidbody snowInstance = Instantiate(snowBall, playerCamera.transform.position, playerCamera.transform.rotation) as Rigidbody;
+            snowInstance.velocity = 15 * playerCamera.transform.forward;
     }
 }
