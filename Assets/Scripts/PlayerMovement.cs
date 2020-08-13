@@ -16,12 +16,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform groundCheck;
 
-    public Camera playerCamera;
-// For throwing the Snowball
-    public Rigidbody snowBall;
-    public Transform snowBallTransform;
-
-
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     //public float jumpHeight = 3f;
@@ -114,18 +108,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (lookingAtTree && Input.GetKeyDown(KeyCode.E)){
-                //UnityEngine.Debug.Log("You pressed E");
+                currentTree.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage); 
+            }
+     
 
-                    rayHit.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage); 
-                    
-                }
-        else if (Input.GetKeyDown(KeyCode.G)){
-                //Throw some snow
-                    fireSnowBall();
-                 
-        }
-                //Fill the bucket
-                //mapleBar.value += 10;
+                
     }
 
     void Start(){
@@ -147,8 +134,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void fireSnowBall(){
-           Rigidbody snowInstance = Instantiate(snowBall, playerCamera.transform.position, playerCamera.transform.rotation) as Rigidbody;
-            snowInstance.velocity = 15 * playerCamera.transform.forward;
-    }
+ 
 }

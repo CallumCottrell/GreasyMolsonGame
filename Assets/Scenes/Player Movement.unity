@@ -133,7 +133,17 @@ PrefabInstance:
     - target: {fileID: 5027090052164640804, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027090052164640804, guid: 6c763bfa587c3524080cf4b87662a0cb,
+        type: 3}
+      propertyPath: m_MinValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027090052164640804, guid: 6c763bfa587c3524080cf4b87662a0cb,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5027090052164640805, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
@@ -193,12 +203,12 @@ PrefabInstance:
     - target: {fileID: 5027090052164640805, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -142.7
+      value: -351.50842
       objectReference: {fileID: 0}
     - target: {fileID: 5027090052164640805, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5027090052164640805, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
@@ -248,7 +258,7 @@ PrefabInstance:
     - target: {fileID: 5027090052164640811, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5027090053608729072, guid: 6c763bfa587c3524080cf4b87662a0cb,
         type: 3}
@@ -5505,7 +5515,7 @@ GameObject:
   - component: {fileID: 1078186646}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6079,7 +6089,7 @@ GameObject:
   - component: {fileID: 1321492489}
   - component: {fileID: 1321492491}
   - component: {fileID: 1321492492}
-  - component: {fileID: 1321492493}
+  - component: {fileID: 1321492494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6141,10 +6151,6 @@ MonoBehaviour:
   speed: 12
   gravity: -9.81
   groundCheck: {fileID: 898685245}
-  playerCamera: {fileID: 1315263842}
-  snowBall: {fileID: 9101754488370728330, guid: 64280f0feb4f2e943bf32242a9ad6320,
-    type: 3}
-  snowBallTransform: {fileID: 954137068}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
@@ -6169,7 +6175,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1321492493
+--- !u!114 &1321492494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6178,10 +6184,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321492488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af70be40a5650d4497abef11bb391a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a3f4976e7764de449295b19e0b53871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: {fileID: 914289733}
+  playerCamera: {fileID: 1315263842}
+  snowBall: {fileID: 9101754488370728330, guid: 64280f0feb4f2e943bf32242a9ad6320,
+    type: 3}
+  snowBallVelocityBar: {fileID: 1842032596}
+  minSnowBallVelocity: 5
+  maxSnowBallVelocity: 30
 --- !u!1001 &1597329426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6419,6 +6430,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83aaa1e77c5d8614c91acf272d79a5c3, type: 3}
+--- !u!1 &1842032596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5027090052164640806, guid: 6c763bfa587c3524080cf4b87662a0cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 261084020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1874787371
 GameObject:
   m_ObjectHideFlags: 0
