@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (lookingAtTree && Input.GetKeyDown(KeyCode.E)){
+                currentTree.transform.GetComponent<TreeHealth>().placeBucket(this.transform.position);
                 currentTree.transform.GetComponent<TreeHealth>().RemoveHealth(enemyDamage); 
             }
      
