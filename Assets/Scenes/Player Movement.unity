@@ -6213,7 +6213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1315263842}
-  snowBall: {fileID: 9101754488370728330, guid: 64280f0feb4f2e943bf32242a9ad6320,
+  snowBall: {fileID: 4141870262642435982, guid: b33568f43543c03458221e95b8b97102,
     type: 3}
   snowBallVelocityBar: {fileID: 1842032596}
   minSnowBallVelocity: 5
