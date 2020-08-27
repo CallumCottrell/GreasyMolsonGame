@@ -40,7 +40,7 @@ public class TreeHealth : MonoBehaviour {
          UnityEngine.Debug.Log("diffX" + diffX);
         float diffZ = (playerDirection.z - this.transform.position.z) / 8;
        // float diffZ = Mathf.Abs((this.transform.position.z - playerDirection.z) / 4);           
-        Vector3 bucketPlacement = new Vector3(this.transform.position.x + diffX, -3f , this.transform.position.z + diffZ);
+        Vector3 bucketPlacement = new Vector3(this.transform.position.x + diffX, 3f , this.transform.position.z + diffZ);
         
         Instantiate(bucket, bucketPlacement, bucket.transform.rotation );
     }
