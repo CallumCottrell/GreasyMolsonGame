@@ -1,9 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-// This script handles everything to do with throwing the snow ball
+
+/* 
+This script handles everything to do with throwing the snow ball
+
+Callum Cottrell 8/28/20
+*/
 public class SnowBallThrowing : MonoBehaviour
 {
 
