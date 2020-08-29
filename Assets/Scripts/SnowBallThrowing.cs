@@ -21,6 +21,8 @@ public class SnowBallThrowing : MonoBehaviour
     public float minSnowBallVelocity = 1f;
     public float maxSnowBallVelocity = 30f;
 
+    public float rotationSpeed;
+
     private float snowBallVelocity = 1f;
     // Update is called once per frame
     void Update()
@@ -43,7 +45,8 @@ public class SnowBallThrowing : MonoBehaviour
 
     void fireSnowBall(){
         Rigidbody snowInstance = Instantiate(snowBall, playerCamera.transform.position, playerCamera.transform.rotation) as Rigidbody;
-        snowInstance.velocity = snowBallVelocity * playerCamera.transform.forward;
+        transform.localEulerAngles += transform.forward * rotationSpeed * Time.deltaTime;
+        //snowInstance.velocity = snowBallVelocity * playerCamera.transform.forward;
         snowBallVelocity = 1f;
     }
 }
