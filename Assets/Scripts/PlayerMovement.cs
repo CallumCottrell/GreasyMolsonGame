@@ -27,13 +27,18 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
  
+    float distanceToGround;
+    void Start(){
+        //distanceToGround = this.GetComponent<Collider>().
+    }
 
     // Update is called once per frame
     void Update()
     {
 
-    //      isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        isGrounded = true;
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        //isGrounded = true;
 
         if (isGrounded && velocity.y <0)
         {
@@ -75,5 +80,10 @@ public class PlayerMovement : MonoBehaviour
                 
     }
 
+    bool IsGrounded(){
+
+    return Physics.Raycast(transform.position, -Vector3.up, 1);
+    
+    }
  
 }
