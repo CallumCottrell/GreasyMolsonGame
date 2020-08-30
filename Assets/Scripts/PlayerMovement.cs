@@ -29,22 +29,21 @@ public class PlayerMovement : MonoBehaviour
  
     float distanceToGround;
     void Start(){
-        //distanceToGround = this.GetComponent<Collider>().
+        distanceToGround = transform.position.y - groundCheck.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        //isGrounded = true;
+        isGrounded = IsGrounded();
 
         if (isGrounded && velocity.y <0)
         {
             velocity.y = -2f;
         } 
         float x = Input.GetAxis("Horizontal");
+      
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
@@ -59,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity = Vector3.up * jumpVelocity;
-        };
+        }
  
         velocity.y += gravity * Time.deltaTime;
 
@@ -82,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsGrounded(){
 
-    return Physics.Raycast(transform.position, -Vector3.up, 1);
+    return Physics.Raycast(groundCheck.position, -Vector3.up, .75f);
     
     }
  

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 /*
-    This script handles the player's interaction with the world through the 
+    This script handles the player's interaction with the world through  
     raycast. 
 */
 public class InteractScript : MonoBehaviour
@@ -16,14 +16,13 @@ public class InteractScript : MonoBehaviour
     public Camera cam;
 
     //How far away the looking raycast will go
-    const int lookDistance = 8;
+    const int lookDistance = 4;
 
     bool lookingAtTree = false;
 
     //The interacting variable ensures that the ray wont continuously check tags
     bool interacting = false;
 
-    Vector3 behind = new Vector3(2,2,2);
     // Fixed Update is easier on the engine for the raycast. Updates less frequently
     void FixedUpdate()
     {
@@ -33,16 +32,24 @@ public class InteractScript : MonoBehaviour
     
         Ray rayFromPlayer = new Ray(cam.transform.position, cam.transform.forward);
         
-        Debug.DrawRay(transform.position, cam.transform.forward, Color.green);
+        //This tool draws a raycast from the player on the screen to see where it's going
+        Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.green);
+        
+    
+        if (Physics.Raycast(rayFromPlayer, out rayHit, lookDistance) && !rayHit.collider.tag.Equals("ground")){
 
-        if (Physics.Raycast(rayFromPlayer, out rayHit, lookDistance)){
-            
+           
+            UnityEngine.Debug.Log("Looking at " + rayHit.collider.tag 
+            + " and interacting is " + interacting);
+           
+
             if (!interacting){
+               
                 //We are actively looking at something, so stop analyzing it
                 interacting = true;
 
                 //less expensive to access the string of the rayhit just once
-                string tag = rayHit.collider.tag;
+                 string tag = rayHit.collider.tag;
 
                 //If we found a tree and we arent already looking at a tree
                 if (tag.Equals("tree")){
