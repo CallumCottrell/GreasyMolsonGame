@@ -11,7 +11,7 @@ public class InteractScript : MonoBehaviour
     public Canvas mainCanvas;
     private GameObject mapleHealthGO;
     private GameObject textGO;
-    private RaycastHit currentTree;
+    private RaycastHit currentObject;
 
     public Camera cam;
 
@@ -19,6 +19,7 @@ public class InteractScript : MonoBehaviour
     const int lookDistance = 4;
 
     bool lookingAtTree = false;
+    bool lookingAtSled = false;
 
     //The interacting variable ensures that the ray wont continuously check tags
     bool interacting = false;
@@ -54,9 +55,9 @@ public class InteractScript : MonoBehaviour
                 //If we found a tree and we arent already looking at a tree
                 if (tag.Equals("tree")){
 
-                    currentTree = rayHit;    
+                    currentObject = rayHit;    
                     createTextOnCursor("Press E for Maple Syrup");
-                    currentTree.collider.GetComponent<MapleTreeScript>().showBar();
+                    currentObject.collider.GetComponent<MapleTreeScript>().showBar();
                     lookingAtTree = true;
 
                 }   
@@ -66,7 +67,10 @@ public class InteractScript : MonoBehaviour
                 }   
 
                 else if (tag.Equals("sled")){
+                    currentObject = rayHit;    
+
                     createTextOnCursor("Press E to ride the sled");
+                    lookingAtSled = true;
                 }
             }
         }
@@ -81,7 +85,7 @@ public class InteractScript : MonoBehaviour
 
             //If we are looking at a tree, there are additional UI elements to deallocate
             if (lookingAtTree){
-            currentTree.collider.GetComponent<MapleTreeScript>().hideBar();
+            currentObject.collider.GetComponent<MapleTreeScript>().hideBar();
             lookingAtTree = false;
             }
             
@@ -96,8 +100,11 @@ public class InteractScript : MonoBehaviour
     void Update(){
 
             if (lookingAtTree && Input.GetKeyDown(KeyCode.E)){
-                currentTree.transform.GetComponent<MapleTreeScript>().placeBucket(this.transform.position);
-                currentTree.transform.GetComponent<MapleTreeScript>().RemoveHealth(); 
+                currentObject.transform.GetComponent<MapleTreeScript>().placeBucket(transform.position);
+                currentObject.transform.GetComponent<MapleTreeScript>().RemoveHealth(); 
+            }
+            else if (lookingAtSled && Input.GetKeyDown(KeyCode.E)){
+                currentObject.transform.GetComponentInChildren<Sled>().activateSled(gameObject);
             }
     }
 

@@ -46,7 +46,7 @@ public class SnowBallThrowing : MonoBehaviour
     void fireSnowBall(){
         Rigidbody snowInstance = Instantiate(snowBall, playerCamera.transform.position, playerCamera.transform.rotation) as Rigidbody;
         transform.localEulerAngles += transform.forward * rotationSpeed * Time.deltaTime;
-        //snowInstance.velocity = snowBallVelocity * playerCamera.transform.forward;
+        snowInstance.velocity = snowBallVelocity * playerCamera.transform.forward;
         snowBallVelocity = 1f;
     }
 }

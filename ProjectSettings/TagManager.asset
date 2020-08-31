@@ -8,6 +8,7 @@ TagManager:
   - maple
   - ground
   - sled
+  - playerBody
   layers:
   - Default
   - TransparentFX
