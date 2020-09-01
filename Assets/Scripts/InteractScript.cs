@@ -104,6 +104,7 @@ public class InteractScript : MonoBehaviour
                 currentObject.transform.GetComponent<MapleTreeScript>().RemoveHealth(); 
             }
             else if (lookingAtSled && Input.GetKeyDown(KeyCode.E)){
+                currentObject.transform.GetComponentInChildren<Sled>().enabled = true;
                 currentObject.transform.GetComponentInChildren<Sled>().activateSled(gameObject);
             }
     }

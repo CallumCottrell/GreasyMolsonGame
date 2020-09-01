@@ -25,13 +25,12 @@ public class Sled : MonoBehaviour
  
     private bool active = false;
      void Start(){
-    
+         enabled = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (active){
+    void Update(){
+  
 
         float x = Input.GetAxis("Horizontal");
       
@@ -44,18 +43,22 @@ public class Sled : MonoBehaviour
         else    
             speed = 12;
 
-        }
-       
- 
+    
+
     }
 
  
     public void activateSled(GameObject player){
               
-              active = true;
+              //Now the sled is active instead of the player
+
+              //Disable things related to the player
               player.GetComponentInChildren<Camera>().enabled = false;
+              player.GetComponentInChildren<PlayerMovement>().enabled =false;
+              
               sledCamera.enabled = true;
               sledCamera.GetComponent<MouseLook>().enabled = true;
+
 
               //this.GetComponent<CharacterController>().enabled = true;
              // player.GetComponent<CharacterController>().enabled = false;

@@ -79,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
                 
     }
 
+    // Raycast from the groundcheck transform downwards. If theres a collision then we are grounded.
     bool IsGrounded(){
 
     return Physics.Raycast(groundCheck.position, -Vector3.up, .75f);
